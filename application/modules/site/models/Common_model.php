@@ -9,7 +9,7 @@ class Common_model extends CI_Model {
 	}
 
 	public function getMenu() {
-		return $this->buildTree($this->db->get("menu")->result());
+		return $this->buildTree($this->db->where("menu_status", 1)->get("menu")->result());
 	}
 
 	public function buildTree($elements, $parent = 0) {
@@ -29,7 +29,11 @@ class Common_model extends CI_Model {
 		return $return;
 	}
 
-	
+	public function getSlides() {
+		return $this->db->where('slide_status', 1)->get("slides")->result();
+	}
+
+
 
 }
 

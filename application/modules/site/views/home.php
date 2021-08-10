@@ -98,6 +98,18 @@
 		object-fit: cover;
 	}
 
+	.swiper-button-next, .swiper-button-prev {
+		color: #fff;
+	}
+
+	.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+		right: 40px;
+	}
+
+	.swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+		left: 40px;
+	}
+
 	/* Content Stilleri */
 
 	.content {
@@ -154,9 +166,11 @@
 		<section id="hero-area">
 			<div class="swiper-container mySwiper">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="https://dummyimage.com/1920x700/000/fff" alt="">
-					</div>
+					<?php foreach ($slides as $slide): ?>
+						<div class="swiper-slide">
+							<img src="<?php echo $slide->slide_image; ?>" alt="<?php echo $slide->slide_title; ?>">
+						</div>
+					<?php endforeach ?>
 				</div>
 				<div class="swiper-button-next"></div>
 				<div class="swiper-button-prev"></div>
@@ -165,11 +179,13 @@
 		<section id="about">
 			<div class="container">
 				<div class="row">
-					<div class="col">
-						<h2>İzmir Hakkında</h2>
-						<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat commodi, dicta! Placeat ab non quis quos veritatis, distinctio, assumenda aspernatur temporibus id odio ipsum esse repellendus error doloremque quo enim!</p>
-						<a href="#" class="btn btn-info text-white">Devamı</a>
-					</div>
+					<?php foreach ($contents as $content): ?>
+						<div class="col">
+							<h2><?php echo $content->content_title; ?></h2>
+							<p><?php echo $content->content_text; ?></p>
+							<a href="<?php echo base_url($content->s_url); ?>" class="btn btn-info text-white">Devamı</a>
+						</div>
+					<?php endforeach ?>
 				</div>
 			</div>
 		</section>
@@ -179,18 +195,20 @@
 					<div class="col">
 						<div class="contents-title d-flex justify-content-between align-items-center">
 							<h2>Haberler</h2>
-							<a href="#" class="btn"><i class="fas fa-plus"></i></a>
+							<button class="btn more-btn" data-limit="3" data-offset="3"><i class="fas fa-plus"></i></button>
 						</div>
 						<div class="contents-list">
-							<div class="content d-flex">
-								<div class="content-img flex-shrink-0">
-									<img src="https://dummyimage.com/600x400/000/fff" alt="">
+							<?php foreach ($news as $nws): ?>
+								<div class="content d-flex mb-3">
+									<div class="content-img flex-shrink-0">
+										<img src="<?php echo $nws->news_image; ?>" alt="<?php echo $nws->news_title; ?>">
+									</div>
+									<div class="content-text py-2">
+										<h3 class="content-title"><?php echo $nws->news_title; ?></h3>
+										<p><?php echo $nws->news_content; ?></p>
+									</div>
 								</div>
-								<div class="content-text py-2">
-									<h3 class="content-title">Deneme Duyuru 1</h3>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Aliquid ea libero, quos eveniet sint iusto corrupti voluptatem perspiciatis debitis quod pariatur consequatur molestiae quaerat voluptatum optio, hic, sequi eum quisquam?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae pariatur fuga laudantium quisquam reprehenderit sapiente suscipit, est, maxime perferendis, ut atque. Vel accusantium, voluptates incidunt, totam ullam a pariatur eos?</p>
-								</div>
-							</div>
+							<?php endforeach ?>
 						</div>
 					</div>
 				</div>
@@ -210,6 +228,7 @@
 		</div>
 	</footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -222,5 +241,43 @@
 			prevEl: ".swiper-button-prev",
 		},
 	});
+
+	var buton_offset, buton_limit;
+
+	$(".more-btn").on("click", function(e) {
+		e.preventDefault();
+		var buton = $(this);
+		buton_limit = buton.data("limit");
+		buton_offset = buton.attr("data-offset");
+		$.ajax({
+			url: '/fetch_news',
+			type: 'POST',
+			data: {limit: buton_limit, offset: buton_offset},
+			beforeSend: function(bs) {
+				buton.prop("disabled", true);
+			},
+			success: function(donen) {
+				if(donen.status) {
+					$(donen.news).each(function(i, v) {
+						buton.attr("data-offset", (parseInt(buton_offset) + 3));
+						$(".contents-list").append(`<div class="content d-flex mb-3">
+							<div class="content-img flex-shrink-0">
+							<img src="${v.news_image}" alt="${v.news_title}">
+							</div>
+							<div class="content-text py-2">
+							<h3 class="content-title">${v.news_title}</h3>
+							<p>${v.news_content}</p>
+							</div>
+							</div>`)
+					})
+					if(!donen.last) {
+						buton.prop("disabled", false);
+					}
+				}else {
+
+				}
+			}
+		});
+	})
 </script>
 </html>
