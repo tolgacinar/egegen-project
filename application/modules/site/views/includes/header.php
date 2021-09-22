@@ -5,13 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><?php echo $page_title; ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<style>
 	/* logo ayarı */
 
 	.header .navbar-brand {
 		margin-right: 50px;
+	}
+
+	#hero-area {
+		width: 100%;
 	}
 
 	/* Menü */
@@ -68,46 +71,13 @@
 
 	/* Anasayfa slider ayarları */
 
-	.swiper-container {
-		width: 100%;
-		height: 500px;
+	.carousel-item {
+		height: 600px;
 	}
-
-	.swiper-slide {
-		text-align: center;
-		font-size: 18px;
-		background: #fff;
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: -webkit-flex;
-		display: flex;
-		-webkit-box-pack: center;
-		-ms-flex-pack: center;
-		-webkit-justify-content: center;
-		justify-content: center;
-		-webkit-box-align: center;
-		-ms-flex-align: center;
-		-webkit-align-items: center;
-		align-items: center;
-	}
-
-	.swiper-slide img {
-		display: block;
-		width: 100%;
-		height: 100%;
+	.carousel-item img {
 		object-fit: cover;
-	}
-
-	.swiper-button-next, .swiper-button-prev {
-		color: #fff;
-	}
-
-	.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
-		right: 40px;
-	}
-
-	.swiper-button-prev, .swiper-container-rtl .swiper-button-next {
-		left: 40px;
+		height: 100%;
+		width: 100%;
 	}
 
 	/* Content Stilleri */

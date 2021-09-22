@@ -1,15 +1,22 @@
 <main>
 	<section id="hero-area">
-		<div class="swiper-container mySwiper">
-			<div class="swiper-wrapper">
-				<?php foreach ($slides as $slide): ?>
-					<div class="swiper-slide">
-						<img src="<?php echo $slide->slide_image; ?>" alt="<?php echo $slide->slide_title; ?>">
+		<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<?php foreach ($slides as $key => $slide): ?>
+					<div class="carousel-item <?php echo $key == 0 ? "active" : ""; ?>" data-bs-interval="10000">
+						<img src="<?php echo $slide->slide_image; ?>" class="d-block w-100" alt="<?php echo $slide->slide_title; ?>">
 					</div>
+
 				<?php endforeach ?>
 			</div>
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
 	</section>
 	<section id="about">
