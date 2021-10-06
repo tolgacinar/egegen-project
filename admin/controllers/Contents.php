@@ -32,7 +32,6 @@ class Contents extends CI_Controller {
 			redirect('admin/contents','refresh');
 		}
 	}
-
 }
 
 /* End of file Contents.php */
