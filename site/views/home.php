@@ -23,7 +23,7 @@
 		<div class="container">
 			<div class="row">
 				<?php foreach ($contents as $content): ?>
-					<div class="col">
+					<div class="col-12 mt-3 border p-3">
 						<h2><?php echo $content->content_title; ?></h2>
 						<p><?php echo $content->content_text; ?></p>
 						<a href="<?php echo base_url($content->s_url); ?>" class="btn btn-info text-white">Devamı</a>

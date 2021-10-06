@@ -5,6 +5,7 @@
 				<h3 class="card-title">İçerikler Tablosu</h3>
 
 				<div class="card-tools">
+					<a class="btn btn-sm btn-primary" href="<?php echo base_url("admin/contents/excel") ?>"><i class="fa fa-plus"></i> Excel</a>
 					<a class="btn btn-sm btn-primary" href="<?php echo base_url("admin/contents/create") ?>"><i class="fa fa-plus"></i> Yeni İçerik</a>
 				</div>
 			</div>

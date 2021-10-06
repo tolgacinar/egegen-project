@@ -32,6 +32,11 @@ class Contents extends CI_Controller {
 			redirect('admin/contents','refresh');
 		}
 	}
+
+	public function excel() {
+		$this->load->library('excel');
+		$this->excel->listToExcel($this->contents->getContents(), ["content_title", "content_text", "content_image"]);
+	}
 }
 
 /* End of file Contents.php */

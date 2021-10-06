@@ -23,6 +23,7 @@ class Home_model extends CI_Model {
 
 	public function getNews($limit = 0, $offset = 0) {
 		return $this->db
+		->order_by("news.news_id", "desc")
 		->where(["news.news_status" => 1, "seo_url.s_type" => "news"])
 		->limit($limit, $offset)
 		->join("seo_url", "news.news_id = seo_url.s_target", "left")

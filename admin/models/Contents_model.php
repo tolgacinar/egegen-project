@@ -36,9 +36,9 @@ class Contents_model extends CI_Model {
 				$content_id = $this->db->insert_id();
 
 				$this->db->insert("seo_url", [
-					"s_type"	=>	"contents",
+					"s_type"	=>	"content",
 					"s_target"	=>	$content_id,
-					"s_url"		=>	"contents/" . permalink($this->input->post("content_title", TRUE))
+					"s_url"		=>	"content/" . permalink($this->input->post("content_title", TRUE))
 				]);
 
 				if ($this->db->trans_status() === FALSE) {
