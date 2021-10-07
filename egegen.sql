@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 11 Ağu 2021, 01:38:51
--- Sunucu sürümü: 10.4.19-MariaDB
--- PHP Sürümü: 7.4.20
+-- Üretim Zamanı: 07 Eki 2021, 11:01:20
+-- Sunucu sürümü: 10.4.17-MariaDB
+-- PHP Sürümü: 7.0.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -40,7 +41,8 @@ CREATE TABLE `contents` (
 --
 
 INSERT INTO `contents` (`content_id`, `content_title`, `content_text`, `content_image`, `content_status`) VALUES
-(1, 'İzmir Hakkında', '<p><b>İzmir hakkında</b> texti buraya gelecek</p>', 'uploads/contents/izmir-hakkinda.jpg', 1);
+(1, 'İzmir Hakkında', '<p><b>İzmir hakkında</b> texti buraya gelecek</p>', 'uploads/contents/izmir-hakkinda.jpg', 1),
+(3, 'qsdqsdqsdqsd', 'azazazaz', 'uploads/contents/okul-toren-bayraklari-8.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,8 @@ INSERT INTO `news` (`news_id`, `news_title`, `news_content`, `news_image`, `news
 (7, 'Deneme Haber 7', 'Deneme Haber 7 Texti Buraya Gelecek', 'uploads/news/news-7.jpg', 1),
 (8, 'Deneme Haber 8', 'Deneme Haber 8 Texti Buraya Gelecek', 'uploads/news/news-8.jpg', 1),
 (9, 'Deneme Haber 9', 'Deneme Haber 9 Texti Buraya Gelecek', 'uploads/news/news-9.jpg', 1),
-(10, 'Deneme Haber 10', 'Deneme Haber 10 Texti Buraya Gelecek', 'uploads/news/news-10.jpg', 1);
+(10, 'Deneme Haber 10', 'Deneme Haber 10 Texti Buraya Gelecek', 'uploads/news/news-10.jpg', 1),
+(14, 'test', 'test', 'uploads/news/ataturk-bayraklari-duvar.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,29 @@ INSERT INTO `seo_url` (`s_id`, `s_type`, `s_target`, `s_url`) VALUES
 (8, 'news', 7, 'news/news-7'),
 (9, 'news', 8, 'news/news-8'),
 (10, 'news', 9, 'news/news-9'),
-(11, 'news', 10, 'news/news-10');
+(11, 'news', 10, 'news/news-10'),
+(12, 'news', 12, 'haber-testi'),
+(15, 'content', 3, 'content/qsdqsdqsdqsd'),
+(16, 'news', 14, 'news/test');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `set_key` varchar(255) NOT NULL,
+  `set_val` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `settings`
+--
+
+INSERT INTO `settings` (`id`, `set_key`, `set_val`) VALUES
+(1, 'menu', '[{\"text\":\"Anasayfa\",\"href\":\"http://localhost\",\"icon\":\"\",\"target\":\"_self\",\"title\":\"\"},{\"text\":\"Yazılar\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"children\":[{\"text\":\"Yazı 1\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\"},{\"text\":\"Yazı 2\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\"}]},{\"text\":\"Gezilecek Yerler\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\"},{\"text\":\"Galeri\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"children\":[{\"text\":\"Galeri 1\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\"},{\"text\":\"Galeri 2\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\"}]},{\"text\":\"İletişim\",\"href\":\"#\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\"}]');
 
 -- --------------------------------------------------------
 
@@ -151,7 +176,8 @@ CREATE TABLE `slides` (
 INSERT INTO `slides` (`slide_id`, `slide_title`, `slide_image`, `slide_status`) VALUES
 (1, 'Slide 1', 'uploads/slides/slide-1.jpg', 1),
 (2, 'Slide 2', 'uploads/slides/slide-2.jpg', 1),
-(3, 'Slide 3', 'uploads/slides/slide-3.jpg', 1);
+(3, 'Slide 3', 'uploads/slides/slide-3.jpg', 1),
+(9, 'test', 'uploads/slides/ataturk-bayraklari-duvar-5.jpg', 1);
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -182,6 +208,12 @@ ALTER TABLE `seo_url`
   ADD PRIMARY KEY (`s_id`);
 
 --
+-- Tablo için indeksler `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `slides`
 --
 ALTER TABLE `slides`
@@ -195,7 +227,7 @@ ALTER TABLE `slides`
 -- Tablo için AUTO_INCREMENT değeri `contents`
 --
 ALTER TABLE `contents`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `menu`
@@ -207,19 +239,25 @@ ALTER TABLE `menu`
 -- Tablo için AUTO_INCREMENT değeri `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `seo_url`
 --
 ALTER TABLE `seo_url`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `slides`
 --
 ALTER TABLE `slides`
-  MODIFY `slide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `slide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
