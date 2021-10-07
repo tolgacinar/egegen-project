@@ -9,7 +9,9 @@ class Common_model extends CI_Model {
 	}
 
 	public function getMenu() {
-		return $this->buildTree($this->db->where("menu_status", 1)->get("menu")->result());
+		return json_decode($this->db->get_where("settings", ['set_key' => 'menu'])->row()->set_val);
+		// return $this->buildTree($this->db->where("menu_status", 1)->get("menu")->result());
+		
 	}
 
 	public function buildTree($elements, $parent = 0) {

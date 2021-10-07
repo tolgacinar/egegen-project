@@ -139,12 +139,12 @@
 				<div class="collapse navbar-collapse" id="main_nav">
 					<ul class="navbar-nav">
 						<?php foreach ($menus as $menu): ?>
-							<li class="nav-item <?php echo $menu->children ? "dropdown" : ""; ?>">
-								<a class="nav-link <?php echo $menu->children ? "dropdown-toggle" : ""; ?>" <?php echo $menu->children ? "data-bs-toggle=\"dropdown\"" : ""; ?> href="<?php echo base_url($menu->menu_href); ?>"><?php echo $menu->menu_title; ?></a>
-								<?php if ($menu->children): ?>
+							<li class="nav-item <?php echo isset($menu->children) ? "dropdown" : ""; ?>">
+								<a class="nav-link <?php echo isset($menu->children) ? "dropdown-toggle" : ""; ?>" <?php echo isset($menu->children) ? "data-bs-toggle=\"dropdown\"" : ""; ?> href="<?php echo base_url($menu->href); ?>"><?php echo $menu->text; ?></a>
+								<?php if (isset($menu->children)): ?>
 									<ul class="dropdown-menu">
 										<?php foreach ($menu->children as $child): ?>
-											<li><a class="dropdown-item" href="#"><?php echo $child->menu_title; ?></a></li>
+											<li><a class="dropdown-item" href="<?php echo $child->href; ?>"><?php echo $child->text; ?></a></li>
 										<?php endforeach ?>
 									</ul>
 								<?php endif ?>

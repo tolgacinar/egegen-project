@@ -13,6 +13,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?php echo base_url("assets/admin/plugins/fontawesome-free/css/all.min.css") ?>">
+
+  <link rel="stylesheet" href="<?php echo base_url("assets/admin/plugins/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css") ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/admin/plugins/toastr/toastr.min.css") ?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url("assets/admin/dist/css/adminlte.min.css") ?>">
 </head>
@@ -216,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url("admin") ?>" class="nav-link">
+              <a href="<?php echo base_url("admin/menus") ?>" class="nav-link">
                 <i class="nav-icon fas fa-bars"></i>
                 <p>
                   Menüler
